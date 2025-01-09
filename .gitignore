@@ -1,0 +1,6 @@
+# Sonar
+.scannerwork/
+
+# Terraform
+.terraform/
+terraform.tfstate*
