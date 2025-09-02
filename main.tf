@@ -4,12 +4,13 @@ locals {
 
   # Default pool
   node_pool_name = "agentpool"
-  node_count     = 2
+  node_count     = 1
   node_vm_size   = "Standard_D4ds_v5"
 
   identity_type = "SystemAssigned"
 
   resource_group_name = "rg-services-01"
+  subscription_id     = "1d7d141b-b12f-474e-8ef5-231f9a6e8367"
 
   tags = {
     Owner = "Wayne Khan"
@@ -21,15 +22,17 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = ">= 3.99.0"
+      version = ">= 4.38.1"
     }
   }
 }
 
 provider "azurerm" {
-  skip_provider_registration = true # As our access is limited
+  resource_provider_registrations = "none" # As our access is limited
 
   features {}
+
+  subscription_id = local.subscription_id
 }
 
 data "azurerm_resource_group" "services" {
